@@ -1,0 +1,19 @@
+@Bibliotekssystem2026_HostAddress = http://localhost:5296
+
+GET {{Bibliotekssystem2026_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+Initial project setup: LibrarySystem console + xUnit test project
+
+Bibliotekssystem2026/
+??? LibrarySystem.sln              ? Ny lösningsfil
+??? LibrarySystem/                 ? Konsolprojekt
+?   ??? LibrarySystem.csproj
+?   ??? Program.cs
+??? LibrarySystem.Tests/           ? xUnit-testprojekt (refererar till LibrarySystem)
+?   ??? LibrarySystem.Tests.csproj
+?   ??? UnitTest1.cs
+??? Bibliotekssystem2026.sln       ? Ditt gamla Web API-projekt (finns kvar)
+??? Bibliotekssystem2026/          
