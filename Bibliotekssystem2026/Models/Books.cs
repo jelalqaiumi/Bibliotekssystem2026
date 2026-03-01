@@ -1,6 +1,6 @@
 ﻿namespace Bibliotekssystem2026.Models
 {
-    public class Books : ISearchable
+    public class Book : ISearchable
     {
         public string ISBN { get; }
         public string Title { get; private set; }
@@ -8,7 +8,7 @@
         public int PublishedYear { get; private set; }
         public bool IsAvailable { get; internal set; }
 
-        public Books(string isbn, string title, string author, int publishedYear)
+        public Book(string isbn, string title, string author, int publishedYear)
         {
             if (string.IsNullOrWhiteSpace(isbn))
                 throw new ArgumentException("ISBN cannot be empty");
