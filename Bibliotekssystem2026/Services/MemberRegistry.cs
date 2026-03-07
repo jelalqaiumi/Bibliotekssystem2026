@@ -8,8 +8,6 @@ namespace Bibliotekssystem2026.Services
 
         public void AddMember(Member member) => _members.Add(member);
 
-        public Member? GetMostActiveBorrower() =>
-            _members.OrderByDescending(m => m.BorrowedBooks.Count)
-                    .FirstOrDefault();
+        public IEnumerable<Member> GetAll() => _members;
     }
 }

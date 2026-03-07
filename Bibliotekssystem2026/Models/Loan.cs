@@ -1,4 +1,7 @@
-﻿namespace Bibliotekssystem2026.Models
+﻿using Bibliotekssystem2026.Exceptions;
+using LibrarySystem.Exceptions;
+
+namespace Bibliotekssystem2026.Models
 {
     public class Loan
     {
@@ -13,8 +16,14 @@
         public bool IsOverdue =>
             !IsReturned && DateTime.Now > DueDate;
 
+        public int DaysOverdue =>
+            IsOverdue ? (DateTime.Now - DueDate).Days : 0;
+
         public Loan(Book book, Member member, DateTime loanDate, DateTime dueDate)
         {
+            if (!member.CanBorrow())
+                throw new MaxLoansExceededException();
+
             Book = book;
             Member = member;
             LoanDate = loanDate;
@@ -22,16 +31,25 @@
 
             book.IsAvailable = false;
             member.AddLoan(book);
+            member.AddLoanRecord(this);
         }
 
         public void ReturnBook()
         {
-            if (IsReturned)
-                throw new InvalidOperationException("Book already returned.");
+            if (!Book.IsAvailable)
+                throw new BookAlreadyLoanedException();
 
             ReturnDate = DateTime.Now;
             Book.IsAvailable = true;
             Member.RemoveLoan(Book);
+        }
+
+        public decimal CalculateLateFee(decimal dailyRate)
+        {
+            if (dailyRate < 0)
+                throw new ArgumentException("Daily rate must be positive.");
+
+            return DaysOverdue * dailyRate;
         }
     }
 }

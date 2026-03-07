@@ -13,7 +13,6 @@ namespace Bibliotekssystem2026.Services
             return loan;
         }
 
-        public IEnumerable<Loan> GetActiveLoans() =>
-            _loans.Where(l => !l.IsReturned);
+        public IEnumerable<Loan> GetAllLoans() => _loans;
     }
 }

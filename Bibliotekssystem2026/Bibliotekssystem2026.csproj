@@ -10,4 +10,12 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
   </ItemGroup>
 
+  <!-- Exclude the test project folder from this build -->
+  <ItemGroup>
+    <Compile Remove="LibrarySystem.Tests\**" />
+    <Content Remove="LibrarySystem.Tests\**" />
+    <EmbeddedResource Remove="LibrarySystem.Tests\**" />
+    <None Remove="LibrarySystem.Tests\**" />
+  </ItemGroup>
+
 </Project>

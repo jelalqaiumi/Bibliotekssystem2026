@@ -21,5 +21,11 @@ namespace Bibliotekssystem2026.Services
 
         public int BorrowedBooksCount() =>
             _books.Count(b => !b.IsAvailable);
+
+        public IEnumerable<Book> GetAll() => _books;
+
+        public IEnumerable<T> SearchItems<T>(IEnumerable<T> items, string term)
+            where T : ISearchable =>
+            items.Where(b => b.Matches(term));
     }
 }
